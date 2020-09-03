@@ -91,6 +91,10 @@ public class OrderController {
 		Optional<Order> item =  oDao.findById(id);
 		List<Integer> orderItems = item.get().getItems();
 		
+		if(orderDetails.getItems().isEmpty()) {
+			throw new InvalidQuantityException();
+		}
+		
 		if(!orderItems.equals(orderDetails.getItems())) {
 			
 			resetInventory(orderItems);
@@ -98,12 +102,21 @@ public class OrderController {
 			updateOrderItens(orderDetails.getItems());
 		}
 		
-		item.get().setCustomer(orderDetails.getCustomer());
-		item.get().setDate(orderDetails.getDate());
-		item.get().setStatus(orderDetails.getStatus());
-				
+		if(orderDetails.getCustomer() != null ) {
+			item.get().setCustomer(orderDetails.getCustomer());
+		}
 		
-		item.get().setItems(orderDetails.getItems());
+		if(orderDetails.getDate() != null) {
+			item.get().setDate(orderDetails.getDate());
+		}
+		
+		if(orderDetails.getStatus() != null) {
+			item.get().setStatus(orderDetails.getStatus());
+		}
+		
+		if(orderDetails.getItems() != null) {
+			item.get().setItems(orderDetails.getItems());
+		}
 						
 		Order orderUpdated = oDao.save(item.get());
 		

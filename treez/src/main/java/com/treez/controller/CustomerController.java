@@ -20,7 +20,7 @@ public class CustomerController {
 	public String addOrder(@RequestBody Customer item) {
 		
 		dao.save(item);
-		return "Cusotomer "+ item.getName() + " saved!";
+		return "Cusotomer #"+ item.getCustomerId() +" - "+ item.getName() + " saved!";
 	}
 
 }

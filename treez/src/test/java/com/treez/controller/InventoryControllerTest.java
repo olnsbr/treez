@@ -68,7 +68,7 @@ class InventoryControllerTest {
 	}
 
 	@Test
-	void testUpdateInventory() {
+	void testUpdateInventory() throws IllegalArgumentException, IllegalAccessException {
 		
 		Inventory item = new Inventory();
 		item.setDescription("some Description");

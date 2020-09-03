@@ -46,15 +46,28 @@ public class InventoryController {
 	}
 	
 	@PutMapping("/inventories/{id}")
-	public ResponseEntity<Inventory> updateInventory(@PathVariable Integer id, @RequestBody Inventory itemDetails){
+	public ResponseEntity<Inventory> updateInventory(@PathVariable Integer id, @RequestBody Inventory itemDetails) {
 		
 		Optional<Inventory> item =  dao.findById(id);
 		
-		item.get().setName(itemDetails.getName());
-		item.get().setDescription(itemDetails.getDescription());
-		item.get().setPrice(itemDetails.getPrice());
-		item.get().setQuantity(itemDetails.getQuantity());
-						
+		//not using reflection here for the sake of simplicity
+		
+		if(itemDetails.getName() != null && !itemDetails.getName().equals("")) {
+			item.get().setName(itemDetails.getName());
+		}
+		
+		if(itemDetails.getDescription() != null && !itemDetails.getDescription().equals("")) {
+			item.get().setDescription(itemDetails.getDescription());
+		}
+		
+		if(itemDetails.getPrice() != null) {
+			item.get().setPrice(itemDetails.getPrice());
+		}
+		
+		if(itemDetails.getQuantity() > 0) {
+			item.get().setQuantity(itemDetails.getQuantity());
+		}
+								
 		Inventory itemUpdated = dao.save(item.get());
 		
 		return ResponseEntity.ok(itemUpdated);
