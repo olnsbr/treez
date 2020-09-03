@@ -55,3 +55,29 @@ Endpoints Availables:
   DELETE http://localhost:3000/orders/1
 11. Creat Customer
   POST http://localhost:3000/customers
+  
+Example JSON Objects:
+
+1.	Create inventory item
+  POST 
+ ` {
+    "name":"RV",
+    "description":"Newmar",
+    "price":"1000",
+    "quantity":"10"	
+  }`
+6.	Create order
+  POST 
+ ` {
+    "customer":3,
+    "date":"2020-09-08",
+    "status":"COMFIRMED",
+    "items":[2,10,8]	
+  }`
+11. Creat Customer
+  POST
+ ` {
+    "name":"janie doe",
+    "email":"missjanie@company.com"
+  }`
+
