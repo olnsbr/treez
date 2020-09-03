@@ -83,4 +83,6 @@ c.	If inventory levels are insufficient, a request to create an order should be 
   
 ## Instalation:
 
-As it is a Spring Boot Aplication, clone the repo and run the class **TreezApplication** as Java aplication in your favorite IDE.
+### You need Maven to run this project. 
+As it is a Spring Boot Aplication, clone the repo and run in command line: 
+`mvn spring-boot:run`
