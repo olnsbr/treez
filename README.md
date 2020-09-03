@@ -34,24 +34,24 @@ The implementation:
 Endpoints Availables: 
 
 1.	Create inventory item
-a.	POST http://localhost:3000/inventories
+  POST http://localhost:3000/inventories
 2.	Read all inventory items
-a.	GET http://localhost:3000/inventories
+  GET http://localhost:3000/inventories
 3.	Read single inventory item
-a.	GET http://localhost:3000/inventories/1
+  GET http://localhost:3000/inventories/1
 4.	Update inventory item
-a.	PUT http://localhost:3000/inventories/1
+  PUT http://localhost:3000/inventories/1
 5.	Delete inventory item
-a.	DELETE http://localhost:3000/inventories/1
+  DELETE http://localhost:3000/inventories/1
 6.	Create order
-a.	POST http://localhost:3000/orders
+  POST http://localhost:3000/orders
 7.	Read all orders
-a.	GET http://localhost:3000/orders
+  GET http://localhost:3000/orders
 8.	Read single order
-a.	GET http://localhost:3000/orders/1
+  GET http://localhost:3000/orders/1
 9.	Update order
-a.	PUT http://localhost:3000/orders/1
+  PUT http://localhost:3000/orders/1
 10.	Delete order
-a.	DELETE http://localhost:3000/orders/1
+  DELETE http://localhost:3000/orders/1
 11. Creat Customer
-a.  POST http://localhost:3000/customers
+  POST http://localhost:3000/customers
