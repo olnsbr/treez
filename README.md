@@ -1,6 +1,6 @@
-Simple Order Service
+# Simple Order Service
 
-Overview
+## Overview
 
 Treez is building a service that allows customers to place orders via a REST API. We would like to be able to model the current inventory, deducting from inventory as orders are created, and adding inventory back if orders are canceled.
 
@@ -25,13 +25,13 @@ a.	When creating, updating, or canceling an order, inventory should be adjusted 
 b.	When a request to create an order is made, it will include a list of inventories to include in the order
 c.	If inventory levels are insufficient, a request to create an order should be denied.
 
-The implementation:
+## Implementation:
 
 * Language: Java.
 * Database: AWS RDS MySQL used (Personal RDS Endpoind is intentionally exposed in this project for evaluation) 
 * Framework: Spring Framework
 
-Endpoints Availables: 
+## Endpoints Availables: 
 
 1.	Create inventory item
   POST http://localhost:3000/inventories
@@ -56,7 +56,7 @@ Endpoints Availables:
 11. Creat Customer
   POST http://localhost:3000/customers
   
-Example JSON Objects:
+## Example JSON Objects:
 
 1.	Create inventory item
   POST 
@@ -80,4 +80,7 @@ Example JSON Objects:
     "name":"janie doe",
     "email":"missjanie@company.com"
   }`
+  
+## Instalation:
 
+As it is a Spring Boot Aplication, clone the repo and run the class **TreezApplication** as Java aplication in your favorite IDE.
