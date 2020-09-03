@@ -84,5 +84,4 @@ c.	If inventory levels are insufficient, a request to create an order should be 
 ## Instalation:
 
 ### You need Maven to run this project. 
-As it is a Spring Boot Aplication, clone the repo and run in command line: 
-`mvn spring-boot:run`
+As it is a Spring Boot Aplication, clone the repo, open a command prompt from the directory with pom.xml and run this code:   `mvn spring-boot:run`
