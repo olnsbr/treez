@@ -17,11 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
-enum Status 
-{ 
-    COMFIRMED, DELETED; 
-} 
-
 @Entity
 @Table(name= "TreezOrder")
 public class Order {

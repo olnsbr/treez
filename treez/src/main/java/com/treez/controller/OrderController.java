@@ -26,6 +26,7 @@ import com.treez.domainException.ErrorResponse;
 import com.treez.domainException.InvalidQuantityException;
 import com.treez.model.Inventory;
 import com.treez.model.Order;
+import com.treez.model.Status;
 
 @RestController
 @RequestMapping("/")
@@ -54,20 +55,22 @@ public class OrderController {
 		if(orderItems.isEmpty()) {
 			return "Can't add Order with empty Inventory!";
 		}else {
-			for (Integer integer : orderItems) {
-				Optional<Inventory> product = iDao.findById(integer);
-				if (product.get().getQuantity() < 1 ) {
-					throw new InvalidQuantityException();
-				}else {
-					product.get().setQuantity(product.get().getQuantity() - 1);
-					oDao.save(item);
-					return "Order #"+ item.getOrderId() + " saved!";
-				}
+			updateOrderItens(orderItems);
+			oDao.save(item);
+			return "Order #"+ item.getOrderId() + " saved!";
+		}		
+	}
+
+	private void updateOrderItens(List<Integer> orderItems) {
+		for (Integer integer : orderItems) {
+			Optional<Inventory> product = iDao.findById(integer);
+			if (product.get().getQuantity() < 1 ) {
+				throw new InvalidQuantityException();
+			}else {
+				product.get().setQuantity(product.get().getQuantity() - 1);
+				iDao.save(product.get());
 			}
 		}
-		
-		return null;
-		
 	}
 	
 	@GetMapping("/orders")
@@ -86,15 +89,33 @@ public class OrderController {
 	public ResponseEntity<Order> updateOrder(@PathVariable Integer id, @RequestBody Order orderDetails){
 		
 		Optional<Order> item =  oDao.findById(id);
+		List<Integer> orderItems = item.get().getItems();
+		
+		if(!orderItems.equals(orderDetails.getItems())) {
+			
+			resetInventory(orderItems);
+			
+			updateOrderItens(orderDetails.getItems());
+		}
 		
 		item.get().setCustomer(orderDetails.getCustomer());
 		item.get().setDate(orderDetails.getDate());
 		item.get().setStatus(orderDetails.getStatus());
+				
+		
 		item.get().setItems(orderDetails.getItems());
 						
 		Order orderUpdated = oDao.save(item.get());
 		
 		return ResponseEntity.ok(orderUpdated);
+	}
+
+	private void resetInventory(List<Integer> orderItems) {
+		for (Integer integer : orderItems) {
+			Optional<Inventory> product = iDao.findById(integer);
+			product.get().setQuantity(product.get().getQuantity() + 1);
+			iDao.save(product.get());
+		}
 	}
 	
 	@DeleteMapping("/orders/{id}")
@@ -104,14 +125,11 @@ public class OrderController {
 		
 		List<Integer> orderItems = item.get().getItems();
 		
-		for (Integer integer : orderItems) {
-			
-			Optional<Inventory> invetoryRecord = iDao.findById(integer);
-			invetoryRecord.get().setQuantity(invetoryRecord.get().getQuantity() + 1);
-			iDao.save(invetoryRecord.get());			
-		}
+		resetInventory(orderItems);
 		
-		oDao.delete(item.get());
+		item.get().setStatus(Status.DELETED);
+		
+		oDao.save(item.get());
 			
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
