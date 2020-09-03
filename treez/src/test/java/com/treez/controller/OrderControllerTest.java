@@ -97,9 +97,15 @@ class OrderControllerTest {
 
 		Order testOrder = new Order();
 		
+		testOrder.setItems(new ArrayList<Integer>());
+		
+		testOrder.getItems().add(0); //can't update order without inventory
+		
 		Mockito.when(oDao.findById(anyInt())).thenReturn(Optional.of(testOrder));
 		
 		Mockito.when(oDao.save(testOrder)).thenReturn(testOrder);
+		
+		Mockito.when(iDao.findById(anyInt())).thenReturn(Optional.of(new Inventory()));
 		
 		ResponseEntity<Order> response = oCont.updateOrder(anyInt(), testOrder);
 		
