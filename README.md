@@ -28,7 +28,7 @@ c.	If inventory levels are insufficient, a request to create an order should be 
 ## Implementation:
 
 * Language: Java.
-* Database: AWS RDS MySQL used (Personal RDS Endpoind is intentionally exposed in this project for evaluation) 
+* Database: AWS RDS MySQL used (Or use you own)
 * Framework: Spring Framework
 
 ## Endpoints Availables: 
